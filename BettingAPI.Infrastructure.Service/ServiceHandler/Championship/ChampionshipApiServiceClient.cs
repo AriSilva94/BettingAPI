@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,7 +36,8 @@ namespace BettingAPI.Infrastructure.Service.ServiceHandler.Championship
             using var streamReader = new StreamReader(stream);
             using var jsonTextReader = new JsonTextReader(streamReader);
 
-            return serializer.Deserialize<GetChampionshipServiceResponse>(jsonTextReader);
+            return serializer.Deserialize<GetChampionshipServiceResponse>(response.Content);
+            return JsonConvert.DeserializeObject<GetChampionshipServiceResponse>(response.Content);
         }
     }
 }
