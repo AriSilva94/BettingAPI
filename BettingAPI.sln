@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32804.467
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BettingAPI", "BettingAPI\BettingAPI.csproj", "{F05EF7FD-77E5-4845-B3AC-0ACB8FB98223}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Presentation", "1 - Presentation", "{825B3ABD-F727-4D16-B5FB-2FC9BA6885B5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Domain", "2 - Domain", "{61382BB9-5BEF-4AD9-8E98-18FDD8DBD931}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Infrastructure", "3 - Infrastructure", "{2875290A-5253-4D3C-B6EC-45E86E30AB6E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Crosscutting", "4 - Crosscutting", "{911A5029-397A-4269-8F3F-8C68F6FDFD91}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Tests", "5 - Tests", "{6DE39850-68B5-4C37-863A-01729E549D6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BettingAPI.Infrastructure.Data.Query", "BettingAPI.Infrastructure.Data.Query\BettingAPI.Infrastructure.Data.Query.csproj", "{6476A45E-8A40-4A45-9BD3-4D3C31A60CAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BettingAPI.Infrastructure.Domain", "BettingAPI.Infrastructure.Domain\BettingAPI.Infrastructure.Domain.csproj", "{7EC7B20C-2DBB-4525-B660-9319AD319CA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BettingAPI.Infrastructure.Service", "BettingAPI.Infrastructure.Service\BettingAPI.Infrastructure.Service.csproj", "{53158093-8BD9-45DD-B0CD-380F5463DC39}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F05EF7FD-77E5-4845-B3AC-0ACB8FB98223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F05EF7FD-77E5-4845-B3AC-0ACB8FB98223}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F05EF7FD-77E5-4845-B3AC-0ACB8FB98223}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F05EF7FD-77E5-4845-B3AC-0ACB8FB98223}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6476A45E-8A40-4A45-9BD3-4D3C31A60CAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6476A45E-8A40-4A45-9BD3-4D3C31A60CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6476A45E-8A40-4A45-9BD3-4D3C31A60CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6476A45E-8A40-4A45-9BD3-4D3C31A60CAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EC7B20C-2DBB-4525-B660-9319AD319CA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EC7B20C-2DBB-4525-B660-9319AD319CA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EC7B20C-2DBB-4525-B660-9319AD319CA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EC7B20C-2DBB-4525-B660-9319AD319CA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53158093-8BD9-45DD-B0CD-380F5463DC39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53158093-8BD9-45DD-B0CD-380F5463DC39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53158093-8BD9-45DD-B0CD-380F5463DC39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53158093-8BD9-45DD-B0CD-380F5463DC39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F05EF7FD-77E5-4845-B3AC-0ACB8FB98223} = {825B3ABD-F727-4D16-B5FB-2FC9BA6885B5}
+		{6476A45E-8A40-4A45-9BD3-4D3C31A60CAE} = {2875290A-5253-4D3C-B6EC-45E86E30AB6E}
+		{7EC7B20C-2DBB-4525-B660-9319AD319CA4} = {61382BB9-5BEF-4AD9-8E98-18FDD8DBD931}
+		{53158093-8BD9-45DD-B0CD-380F5463DC39} = {2875290A-5253-4D3C-B6EC-45E86E30AB6E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AC43234C-20CF-426B-A9A8-A088D77ED7B5}
+	EndGlobalSection
+EndGlobal
