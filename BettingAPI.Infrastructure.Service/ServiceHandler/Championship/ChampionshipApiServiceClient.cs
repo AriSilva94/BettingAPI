@@ -16,28 +16,27 @@ namespace BettingAPI.Infrastructure.Service.ServiceHandler.Championship
 {
     public class ChampionshipApiServiceClient : IChampionshipApiService
     {
-        readonly string _baseUrl;
+        readonly RestClient _baseUrl;
         readonly string _authorization;
-        private readonly HttpClient _httpClient;
 
         public ChampionshipApiServiceClient(HttpClient httpClient)
         {
-            _baseUrl = "https://api.api-futebol.com.br/v1";
-            _authorization = "test_ed026f9bbe31c19594fc76668c539e";
-            _httpClient = httpClient;
+            _authorization = "live_06b26b0954286ef021464d5bbd044c";
+            _baseUrl = new RestClient("https://api.api-futebol.com.br/v1")
+                .AddDefaultHeader(KnownHeaders.Authorization, $"Bearer {_authorization}");
         }
-        public async Task<GetChampionshipServiceResponse> GetAllChampionshipAsync()
+        public async Task<List<GetChampionshipServiceResponse>> GetAllChampionshipAsync()
         {
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _authorization);
-            var response = await _httpClient.GetAsync($"{_baseUrl}/campeonatos");
+            try
+            {
+                var response = await _baseUrl.GetJsonAsync<List<GetChampionshipServiceResponse>>("/campeonatos");
 
-            var serializer = new JsonSerializer();
-            using var stream = await response.Content.ReadAsStreamAsync();
-            using var streamReader = new StreamReader(stream);
-            using var jsonTextReader = new JsonTextReader(streamReader);
-
-            return serializer.Deserialize<GetChampionshipServiceResponse>(response.Content);
-            return JsonConvert.DeserializeObject<GetChampionshipServiceResponse>(response.Content);
+                return response;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

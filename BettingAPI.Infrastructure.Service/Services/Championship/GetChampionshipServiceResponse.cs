@@ -1,16 +1,47 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BettingAPI.Infrastructure.Service.Services.Championship
 {
+    public class EdicaoAtual
+    {
+        [JsonProperty("edicao_id")]
+        public string EdicaoId { get; set; }
+
+        [JsonProperty("temporada")]
+        public string Temporada { get; set; }
+
+        [JsonProperty("nome")]
+        public string Nome { get; set; }
+
+        [JsonProperty("nome_popular")]
+        public string NomePopular { get; set; }
+
+        [JsonProperty("slug")]
+        public string Slug { get; set; }
+    }
+
+    public class FaseAtual
+    {
+        [JsonProperty("fase_id")]
+        public string FaseId { get; set; }
+
+        [JsonProperty("nome")]
+        public string Nome { get; set; }
+
+        [JsonProperty("slug")]
+        public string Slug { get; set; }
+
+        [JsonProperty("tipo")]
+        public string Tipo { get; set; }
+
+        [JsonProperty("_link")]
+        public string Link { get; set; }
+    }
+
     public class GetChampionshipServiceResponse
     {
         [JsonProperty("campeonato_id")]
-        public int CampeonatoId { get; set; }
+        public string CampeonatoId { get; set; }
 
         [JsonProperty("nome")]
         public string Nome { get; set; }
@@ -28,7 +59,7 @@ namespace BettingAPI.Infrastructure.Service.Services.Championship
         public FaseAtual FaseAtual { get; set; }
 
         [JsonProperty("rodada_atual")]
-        public int RodadaAtual { get; set; }
+        public object RodadaAtual { get; set; }
 
         [JsonProperty("status")]
         public string Status { get; set; }
@@ -42,33 +73,4 @@ namespace BettingAPI.Infrastructure.Service.Services.Championship
         [JsonProperty("_link")]
         public string Link { get; set; }
     }
-}
-
-public class FaseAtual
-{
-    [JsonProperty("fase_id")]
-    public int FaseId { get; set; }
-    [JsonProperty("nome")]
-    public string Nome { get; set; }
-
-    [JsonProperty("slug")]
-    public string Slug { get; set; }
-    [JsonProperty("tipo")]
-    public string Tipo { get; set; }
-    [JsonProperty("_link")]
-    public string Link { get; set; }
-}
-
-public class EdicaoAtual
-{
-    [JsonProperty("edicao_id")]
-    public int EdicaoId { get; set; }
-    [JsonProperty("temporada")]
-    public int Temporada { get; set; }
-    [JsonProperty("nome")]
-    public string Nome { get; set; }
-    [JsonProperty("nome_popular")]
-    public string NomePopular { get; set; }
-    [JsonProperty("slug")]
-    public string Slug { get; set; }
 }

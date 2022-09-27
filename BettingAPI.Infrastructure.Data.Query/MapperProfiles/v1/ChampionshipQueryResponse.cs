@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BettingAPI.Infrastructure.Data.Query.Championship;
 using BettingAPI.Infrastructure.Data.Query.Queries.v1.Championship;
+using BettingAPI.Infrastructure.Service.Services.Championship;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,7 @@ namespace BettingAPI.Infrastructure.Data.Query.MapperProfiles.v1
     {
         public ChampionshipQueryResponse()
         {
-            //CreateMap<GetChampionshipQueryResponse, string>()
-            //    .ForMember();
+            CreateMap<GetChampionshipServiceResponse, GetChampionshipQueryResponse>();
         }
     }
 }

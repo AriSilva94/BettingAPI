@@ -9,6 +9,6 @@ namespace BettingAPI.Infrastructure.Service.Interfaces
 {
     public interface IChampionshipApiService
     {
-        Task<GetChampionshipServiceResponse> GetAllChampionshipAsync();
+        Task<List<GetChampionshipServiceResponse>> GetAllChampionshipAsync();
     }
 }
