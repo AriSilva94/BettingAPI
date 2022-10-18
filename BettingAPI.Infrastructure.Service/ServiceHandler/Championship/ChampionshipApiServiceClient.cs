@@ -19,9 +19,9 @@ namespace BettingAPI.Infrastructure.Service.ServiceHandler.Championship
         readonly RestClient _baseUrl;
         readonly string _authorization;
 
-        public ChampionshipApiServiceClient(HttpClient httpClient)
+        public ChampionshipApiServiceClient()
         {
-            _authorization = "live_06b26b0954286ef021464d5bbd044c";
+            _authorization = "test_494299fadd099ba29bdfcb2391dace";
             _baseUrl = new RestClient("https://api.api-futebol.com.br/v1")
                 .AddDefaultHeader(KnownHeaders.Authorization, $"Bearer {_authorization}");
         }
@@ -29,6 +29,13 @@ namespace BettingAPI.Infrastructure.Service.ServiceHandler.Championship
         {
             try
             {
+                using (var httpClient = new HttpClient())
+                {
+                    httpClient.DefaultRequestHeaders.Add("bearer", _authorization);
+                    var request = await httpClient.GetAsync(_baseUrl + "/campeonatos");
+                    var content = await request.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<List<GetChampionshipServiceResponse>>(content);
+                }
                 var response = await _baseUrl.GetJsonAsync<List<GetChampionshipServiceResponse>>("/campeonatos");
 
                 return response;

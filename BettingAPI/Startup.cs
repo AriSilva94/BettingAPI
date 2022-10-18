@@ -34,7 +34,7 @@ namespace BettingAPI
         {
 
             services.AddControllers();
-            services.AddMediatR(typeof(GetChampionshipQueryHandler).Assembly);
+            services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IChampionshipApiService, ChampionshipApiServiceClient>();
             services.AddHttpClient<IChampionshipApiService, ChampionshipApiServiceClient>();
             services.AddAutoMapper(typeof(Startup).Assembly);

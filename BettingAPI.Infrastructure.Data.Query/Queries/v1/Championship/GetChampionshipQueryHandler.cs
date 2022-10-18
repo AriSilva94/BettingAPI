@@ -1,4 +1,5 @@
-﻿using BettingAPI.Infrastructure.Data.Query.Championship;
+﻿using AutoMapper;
+using BettingAPI.Infrastructure.Data.Query.Championship;
 using BettingAPI.Infrastructure.Service.Interfaces;
 using MediatR;
 using System;
@@ -13,16 +14,21 @@ namespace BettingAPI.Infrastructure.Data.Query.Queries.v1.Championship
     public class GetChampionshipQueryHandler : IRequestHandler<GetChampionshipQuery, GetChampionshipQueryResponse>
     {
         private readonly IChampionshipApiService _championshipApiService;
-        public GetChampionshipQueryHandler(IChampionshipApiService championshipApiService)
+        private readonly IMapper _mapper;
+        public GetChampionshipQueryHandler(IChampionshipApiService championshipApiService,
+                                           IMapper mapper)
         {
             _championshipApiService = championshipApiService;
+            _mapper = mapper;
         }
 
         public async Task<GetChampionshipQueryResponse> Handle(GetChampionshipQuery request, CancellationToken cancellationToken)
         {
-            var response = await _championshipApiService.GetAllChampionshipAsync();
+            var championships = await _championshipApiService.GetAllChampionshipAsync();
 
-            return new GetChampionshipQueryResponse();
+            var result = _mapper.Map<GetChampionshipQueryResponse>(championships);
+
+            return result;
         }
     }
 }
