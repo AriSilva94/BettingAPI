@@ -5,7 +5,7 @@ namespace BettingAPI.Infrastructure.Data.Query.Championship
     public class EdicaoAtual
     {
         [JsonProperty("edicao_id")]
-        public int EdicaoId { get; set; }
+        public int EdicaoId { get; set; } //string
 
         [JsonProperty("temporada")]
         public string Temporada { get; set; }
@@ -23,7 +23,7 @@ namespace BettingAPI.Infrastructure.Data.Query.Championship
     public class FaseAtual
     {
         [JsonProperty("fase_id")]
-        public int FaseId { get; set; }
+        public int FaseId { get; set; } //string
 
         [JsonProperty("nome")]
         public string Nome { get; set; }
@@ -41,7 +41,7 @@ namespace BettingAPI.Infrastructure.Data.Query.Championship
     public class GetChampionshipQueryResponse
     {
         [JsonProperty("campeonato_id")]
-        public int CampeonatoId { get; set; }
+        public string CampeonatoId { get; set; } //string
 
         [JsonProperty("nome")]
         public string Nome { get; set; }

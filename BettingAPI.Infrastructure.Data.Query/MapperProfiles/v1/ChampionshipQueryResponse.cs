@@ -15,6 +15,8 @@ namespace BettingAPI.Infrastructure.Data.Query.MapperProfiles.v1
         public ChampionshipQueryResponse()
         {
             CreateMap<GetChampionshipServiceResponse, GetChampionshipQueryResponse>();
+            CreateMap<Service.Services.Championship.EdicaoAtual, Championship.EdicaoAtual>();
+            CreateMap<Service.Services.Championship.FaseAtual, Championship.FaseAtual>();
         }
     }
 }

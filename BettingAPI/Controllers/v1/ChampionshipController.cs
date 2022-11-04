@@ -1,4 +1,5 @@
-﻿using BettingAPI.Infrastructure.Data.Query.Championship;
+﻿using AutoMapper;
+using BettingAPI.Infrastructure.Data.Query.Championship;
 using BettingAPI.Infrastructure.Data.Query.Queries.v1.Championship;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +12,12 @@ namespace BettingAPI.Controllers.v1
     public class ChampionshipController : Controller
     {
         private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
-        public ChampionshipController(IMediator mediator)
+        public ChampionshipController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
+            _mapper = mapper;
         }
 
         [HttpGet]

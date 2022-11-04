@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection.Metadata;
@@ -16,33 +17,30 @@ namespace BettingAPI.Infrastructure.Service.ServiceHandler.Championship
 {
     public class ChampionshipApiServiceClient : IChampionshipApiService
     {
-        readonly RestClient _baseUrl;
-        readonly string _authorization;
+        private readonly string _baseUrl;
+        private readonly string _authorization;
 
         public ChampionshipApiServiceClient()
         {
-            _authorization = "test_494299fadd099ba29bdfcb2391dace";
-            _baseUrl = new RestClient("https://api.api-futebol.com.br/v1")
-                .AddDefaultHeader(KnownHeaders.Authorization, $"Bearer {_authorization}");
+            _authorization = "live_4f0d54926e5c544ffbf45006006e27";
+            _baseUrl = "https://api.api-futebol.com.br/v1";
         }
         public async Task<List<GetChampionshipServiceResponse>> GetAllChampionshipAsync()
         {
             try
             {
-                using (var httpClient = new HttpClient())
-                {
-                    httpClient.DefaultRequestHeaders.Add("bearer", _authorization);
+                using var httpClient = new HttpClient();
+                
+                    httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + _authorization);
                     var request = await httpClient.GetAsync(_baseUrl + "/campeonatos");
                     var content = await request.Content.ReadAsStringAsync();
                     var result = JsonConvert.DeserializeObject<List<GetChampionshipServiceResponse>>(content);
-                }
-                var response = await _baseUrl.GetJsonAsync<List<GetChampionshipServiceResponse>>("/campeonatos");
 
-                return response;
+                return result;
             }
-            catch (Exception)
+            catch (WebException ex)
             {
-                return null;
+                throw new WebException("An error has occurred");
             }
         }
     }

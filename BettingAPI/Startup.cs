@@ -1,3 +1,6 @@
+using AutoMapper;
+using BettingAPI.Infrastructure.Data.Query.Championship;
+using BettingAPI.Infrastructure.Data.Query.MapperProfiles.v1;
 using BettingAPI.Infrastructure.Data.Query.Queries.v1.Championship;
 using BettingAPI.Infrastructure.Service.Interfaces;
 using BettingAPI.Infrastructure.Service.ServiceHandler.Championship;
@@ -32,16 +35,24 @@ namespace BettingAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
-            services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddScoped<IChampionshipApiService, ChampionshipApiServiceClient>();
-            services.AddHttpClient<IChampionshipApiService, ChampionshipApiServiceClient>();
-            services.AddAutoMapper(typeof(Startup).Assembly);
+            services
+                .AddAutoMapper(Assembly.GetExecutingAssembly())
+                //.AddAutoMapper(typeof(Startup))
+                .AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddScoped(typeof(IChampionshipApiService), typeof(ChampionshipApiServiceClient));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BettingAPI", Version = "v1" });
             });
+
+            services
+                .AddSingleton(provider => new MapperConfiguration(cfg =>
+                {
+                    cfg.AddProfile(new ChampionshipQueryResponse());
+
+                }).CreateMapper());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
