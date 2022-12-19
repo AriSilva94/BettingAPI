@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 
-namespace BettingAPI.Infrastructure.Data.Query.Championship
+namespace BettingAPI.Infrastructure.Data.Query.Queries.v1.Championship
 {
     public class EdicaoAtual
     {
         [JsonProperty("edicao_id")]
-        public int EdicaoId { get; set; } //string
+        public string EdicaoId { get; set; } //string
 
         [JsonProperty("temporada")]
         public string Temporada { get; set; }
@@ -23,7 +23,7 @@ namespace BettingAPI.Infrastructure.Data.Query.Championship
     public class FaseAtual
     {
         [JsonProperty("fase_id")]
-        public int FaseId { get; set; } //string
+        public string FaseId { get; set; } //string
 
         [JsonProperty("nome")]
         public string Nome { get; set; }
@@ -38,7 +38,7 @@ namespace BettingAPI.Infrastructure.Data.Query.Championship
         public string Link { get; set; }
     }
 
-    public class GetChampionshipQueryResponse
+    public class ChampionshipRequest
     {
         [JsonProperty("campeonato_id")]
         public string CampeonatoId { get; set; } //string

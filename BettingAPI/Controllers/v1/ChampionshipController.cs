@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using BettingAPI.Infrastructure.Data.Query.Championship;
-using BettingAPI.Infrastructure.Data.Query.Queries.v1.Championship;
+﻿using BettingAPI.Infrastructure.Data.Query.Queries.v1.Championship;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -12,18 +10,23 @@ namespace BettingAPI.Controllers.v1
     public class ChampionshipController : Controller
     {
         private readonly IMediator _mediator;
-        private readonly IMapper _mapper;
 
-        public ChampionshipController(IMediator mediator, IMapper mapper)
+        public ChampionshipController(IMediator mediator)
         {
             _mediator = mediator;
-            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetChampionshipAsync()
+        public async Task<IActionResult> GetAllChampionships()
         {
-            var response = await _mediator.Send(new GetChampionshipQuery());
+            var response = await _mediator.Send(new ChampionshipQueryList());
+            return Ok(response);
+        }
+
+        [HttpGet, Route("championship/{id}")]
+        public async Task<IActionResult> GetChampionshipById(string id)
+        {
+            var response = await _mediator.Send(new ChampionshipQueryBydId(id));
             return Ok(response);
         }
     }

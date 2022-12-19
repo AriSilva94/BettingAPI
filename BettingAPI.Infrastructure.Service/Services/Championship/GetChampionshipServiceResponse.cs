@@ -38,7 +38,7 @@ namespace BettingAPI.Infrastructure.Service.Services.Championship
         public string Link { get; set; }
     }
 
-    public class GetChampionshipServiceResponse
+    public class ChampionshipResponse
     {
         [JsonProperty("campeonato_id")]
         public string CampeonatoId { get; set; }

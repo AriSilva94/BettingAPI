@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using BettingAPI.Infrastructure.Data.Query.Championship;
 using BettingAPI.Infrastructure.Data.Query.Queries.v1.Championship;
 using BettingAPI.Infrastructure.Service.Services.Championship;
 using System;
@@ -14,9 +13,9 @@ namespace BettingAPI.Infrastructure.Data.Query.MapperProfiles.v1
     {
         public ChampionshipQueryResponse()
         {
-            CreateMap<GetChampionshipServiceResponse, GetChampionshipQueryResponse>();
-            CreateMap<Service.Services.Championship.EdicaoAtual, Championship.EdicaoAtual>();
-            CreateMap<Service.Services.Championship.FaseAtual, Championship.FaseAtual>();
+            CreateMap<ChampionshipResponse, ChampionshipRequest>();
+            CreateMap<Service.Services.Championship.EdicaoAtual, Queries.v1.Championship.EdicaoAtual>();
+            CreateMap<Service.Services.Championship.FaseAtual, Queries.v1.Championship.FaseAtual>();
         }
     }
 }

@@ -1,46 +1,53 @@
 ﻿using BettingAPI.Infrastructure.Service.Interfaces;
 using BettingAPI.Infrastructure.Service.Services.Championship;
 using Newtonsoft.Json;
-using RestSharp;
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Reflection.Metadata;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BettingAPI.Infrastructure.Service.ServiceHandler.Championship
 {
     public class ChampionshipApiServiceClient : IChampionshipApiService
     {
-        private readonly string _baseUrl;
-        private readonly string _authorization;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public ChampionshipApiServiceClient()
+        public ChampionshipApiServiceClient(IHttpClientFactory httpClientFactory)
         {
-            _authorization = "live_4f0d54926e5c544ffbf45006006e27";
-            _baseUrl = "https://api.api-futebol.com.br/v1";
+            _httpClientFactory = httpClientFactory;
         }
-        public async Task<List<GetChampionshipServiceResponse>> GetAllChampionshipAsync()
+
+        public async Task<List<ChampionshipResponse>> GetAllChampionshipAsync()
         {
             try
             {
-                using var httpClient = new HttpClient();
-                
-                    httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + _authorization);
-                    var request = await httpClient.GetAsync(_baseUrl + "/campeonatos");
-                    var content = await request.Content.ReadAsStringAsync();
-                    var result = JsonConvert.DeserializeObject<List<GetChampionshipServiceResponse>>(content);
+                using var client = _httpClientFactory.CreateClient("base-url");
+                var request = await client.GetAsync(client.BaseAddress + "/campeonatos");
+                var content = await request.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<List<ChampionshipResponse>>(content);
 
                 return result;
             }
             catch (WebException ex)
             {
-                throw new WebException("An error has occurred");
+                throw new WebException("An error has occurred", ex);
+            }
+        }
+
+        public async Task<ChampionshipResponse> GetChampionshipById(string id)
+        {
+            try
+            {
+                using var client = _httpClientFactory.CreateClient("base-url");
+                var request = await client.GetAsync(client.BaseAddress + $"/campeonatos/{id}");
+                var content = await request.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ChampionshipResponse>(content);
+
+                return result;
+            }
+            catch (WebException ex)
+            {
+                throw new WebException("An error has occurred", ex);
             }
         }
     }

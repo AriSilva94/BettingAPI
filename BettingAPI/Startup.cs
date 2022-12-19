@@ -1,25 +1,16 @@
 using AutoMapper;
-using BettingAPI.Infrastructure.Data.Query.Championship;
 using BettingAPI.Infrastructure.Data.Query.MapperProfiles.v1;
-using BettingAPI.Infrastructure.Data.Query.Queries.v1.Championship;
 using BettingAPI.Infrastructure.Service.Interfaces;
 using BettingAPI.Infrastructure.Service.ServiceHandler.Championship;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace BettingAPI
 {
@@ -32,19 +23,23 @@ namespace BettingAPI
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
             services
                 .AddAutoMapper(Assembly.GetExecutingAssembly())
-                //.AddAutoMapper(typeof(Startup))
                 .AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped(typeof(IChampionshipApiService), typeof(ChampionshipApiServiceClient));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BettingAPI", Version = "v1" });
+            });
+
+            services.AddHttpClient("base-url", client =>
+            {
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Configuration.GetSection("Auth:authorization-bearer").Value);
+                client.BaseAddress = new Uri(Configuration.GetSection("Urls:championship").Value);
             });
 
             services
@@ -55,7 +50,6 @@ namespace BettingAPI
                 }).CreateMapper());
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -66,11 +60,8 @@ namespace BettingAPI
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
