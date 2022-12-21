@@ -1,4 +1,5 @@
 ﻿using BettingAPI.Infrastructure.Data.Query.Queries.v1.Championship;
+using BettingAPI.Infrastructure.Data.Query.Queries.v1.Table;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -27,6 +28,13 @@ namespace BettingAPI.Controllers.v1
         public async Task<IActionResult> GetChampionshipById(string id)
         {
             var response = await _mediator.Send(new ChampionshipQueryBydId(id));
+            return Ok(response);
+        }
+
+        [HttpGet, Route("/tabela/{id}")]
+        public async Task<IActionResult> GetTableById(string id)
+        {
+            var response = await _mediator.Send(new TableQueryBydId(id));
             return Ok(response);
         }
     }

@@ -2,6 +2,7 @@ using AutoMapper;
 using BettingAPI.Infrastructure.Data.Query.MapperProfiles.v1;
 using BettingAPI.Infrastructure.Service.Interfaces;
 using BettingAPI.Infrastructure.Service.ServiceHandler.Championship;
+using BettingAPI.Infrastructure.Service.ServiceHandler.Table;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,7 @@ namespace BettingAPI
                 .AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped(typeof(IChampionshipApiService), typeof(ChampionshipApiServiceClient));
+            services.AddScoped(typeof(ITableApiService), typeof(TableApiServiceClient));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BettingAPI", Version = "v1" });
@@ -46,6 +48,7 @@ namespace BettingAPI
                 .AddSingleton(provider => new MapperConfiguration(cfg =>
                 {
                     cfg.AddProfile(new ChampionshipQueryResponse());
+                    cfg.AddProfile(new TableQueryResponse());
 
                 }).CreateMapper());
         }
